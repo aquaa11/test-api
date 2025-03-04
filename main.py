@@ -1,12 +1,12 @@
 import os
-import cv2
+import io
 from ultralytics import YOLO
 import supervision as sv
 import numpy as np
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import uuid
-import io
+from PIL import Image
 
 app = Flask(__name__)
 CORS(app)
@@ -27,7 +27,8 @@ def predict():
     if file and file.content_type.startswith("image/"):
         try:
             image_bytes = file.read()
-            image = cv2.imdecode(np.frombuffer(np.frombuffer(image_bytes, np.uint8), np.uint8), cv2.IMREAD_COLOR)
+            image_pil = Image.open(io.BytesIO(image_bytes))
+            image = np.array(image_pil)
             height, width, _ = image.shape
 
             results = model(image, verbose=False)[0]
