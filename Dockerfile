@@ -5,7 +5,6 @@ WORKDIR /app
 COPY requirements.txt requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY app /app
-COPY best.pt /best.pt
+COPY . /app
 
-CMD ["gunicorn", "app.main:app"]
+CMD ["gunicorn", "main:app", "--bind", "0.0.0.0:8080"]
