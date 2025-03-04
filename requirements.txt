@@ -4,4 +4,4 @@ supervision
 numpy
 flask-cors
 gunicorn
-Pillow
+opencv
