@@ -1,7 +1,6 @@
 ﻿Flask
 ultralytics
 supervision
-opencv-python-headless
 numpy
 flask-cors
 gunicorn
